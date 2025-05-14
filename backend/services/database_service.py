@@ -93,6 +93,32 @@ class DatabaseService:
             print(f"Error querying Supabase: {str(e)}")
             return None
     
+    async def get_all_assessments(self):
+        """
+        Get all assessments from the database for analytics purposes
+        Returns a list of all assessment records
+        """
+        if not self.client:
+            print("Supabase client not initialized. Skipping database operation.")
+            return []
+        
+        try:
+            # Query the database for all assessments
+            result = self.client.table("assessments").select("*").execute()
+            
+            if hasattr(result, 'error') and result.error:
+                print(f"Supabase query error: {result.error}")
+                return []
+                
+            if not result.data:
+                return []
+                
+            return result.data
+            
+        except Exception as e:
+            print(f"Error querying Supabase: {str(e)}")
+            return []
+    
     def _compare_form_data(self, data1, data2):
         """
         Compare two form data dictionaries to see if they match

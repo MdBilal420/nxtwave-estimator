@@ -37,16 +37,6 @@ export async function POST(request: NextRequest) {
 		return NextResponse.json(responseData, { status: 200 });
 	} catch (error) {
 		console.error("Error processing request:", error);
-
-		// Fallback to simulated response if backend is not available
-		// This is useful during development
-		if (process.env.NODE_ENV === "development") {
-			console.log("Using fallback simulated response in development mode");
-			const formData = await request.json();
-			const responseData = generateSimulatedResponse(formData);
-			return NextResponse.json(responseData, { status: 200 });
-		}
-
 		return NextResponse.json(
 			{ error: "Failed to process career assessment" },
 			{ status: 500 }
