@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 240, 247, 255;
+	--background-end-rgb: 255, 255, 255;
+}
+
+body {
+	color: rgb(var(--foreground-rgb));
+	background: linear-gradient(
+		to bottom,
+		rgb(var(--background-start-rgb)),
+		rgb(var(--background-end-rgb))
+	);
+	min-height: 100vh;
+}
+
+@layer components {
+	.glassmorphic {
+		@apply bg-glassmorphic-white backdrop-blur-lg border border-white/30 shadow-lg;
+	}
+
+	.glassmorphic-blue {
+		@apply bg-glassmorphic-blue backdrop-blur-lg border border-skyblue-300/30 shadow-lg;
+	}
+
+	.form-input {
+		@apply w-full rounded-md border border-gray-300 px-4 py-2 bg-white shadow-sm focus:border-skyblue-500 focus:ring focus:ring-skyblue-200 focus:ring-opacity-50 transition-all duration-300;
+	}
+
+	.form-select {
+		@apply w-full rounded-md border border-gray-300 px-4 py-2 bg-white shadow-sm focus:border-skyblue-500 focus:ring focus:ring-skyblue-200 focus:ring-opacity-50 transition-all duration-300 appearance-none bg-no-repeat bg-right pr-10;
+		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+		background-size: 1.5em 1.5em;
+	}
+
+	.form-group {
+		@apply mb-6;
+	}
+
+	.form-checkbox {
+		@apply rounded border-gray-300 text-skyblue-500 shadow-sm focus:border-skyblue-500 focus:ring focus:ring-skyblue-200 focus:ring-opacity-50;
+	}
+
+	.btn-primary {
+		@apply px-6 py-2 bg-skyblue-500 text-white font-medium rounded-md hover:bg-skyblue-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed shadow-md;
+	}
+
+	.card {
+		@apply rounded-xl p-6 glassmorphic transition-all duration-300 hover:shadow-xl;
+	}
+}

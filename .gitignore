@@ -1,0 +1,42 @@
+# Next.js (Frontend)
+/frontend/.next/
+/frontend/out/
+/frontend/node_modules/
+/frontend/.env
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+/frontend/.pnpm-debug.log*
+/frontend/coverage
+/frontend/.DS_Store
+/frontend/.vercel
+/frontend/*.pem
+
+# FastAPI (Backend)
+/backend/__pycache__/
+/backend/*.py[cod]
+/backend/*$py.class
+/backend/.env
+/backend/venv/
+/backend/.venv/
+/backend/env/
+/backend/ENV/
+/backend/env.bak/
+/backend/venv.bak/
+/backend/.pytest_cache/
+/backend/.coverage
+/backend/htmlcov/
+/backend/dist/
+/backend/build/
+/backend/*.egg-info/
+/backend/.DS_Store
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo 
