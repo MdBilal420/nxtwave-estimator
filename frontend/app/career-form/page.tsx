@@ -68,7 +68,10 @@ export default function CareerForm() {
 	const onSubmit = async (data: FormData) => {
 		setIsSubmitting(true);
 		try {
-			const response = await axios.post("/api/career-assessment", data);
+			const response = await axios.post(
+				"https://alright-dyanne-bilal420-fe9cd9f1.koyeb.app/api/career-assessment/analyze",
+				data
+			);
 			localStorage.setItem("careerAssessment", JSON.stringify(response.data));
 			router.push("/results");
 		} catch (error) {
