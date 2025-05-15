@@ -141,7 +141,7 @@ export default function AdminDashboard() {
 				// }
 
 				const response = await axios.get(
-					"https://alright-dyanne-bilal420-fe9cd9f1.koyeb.app/api/admin/dashboard"
+					`${process.env.NEXT_PUBLIC_API_URL}/admin/dashboard`
 				);
 
 				// Set the data to state

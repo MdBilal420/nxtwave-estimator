@@ -69,7 +69,7 @@ export default function CareerForm() {
 		setIsSubmitting(true);
 		try {
 			const response = await axios.post(
-				"https://alright-dyanne-bilal420-fe9cd9f1.koyeb.app/api/career-assessment/analyze",
+				`${process.env.NEXT_PUBLIC_API_URL}/career-assessment/analyze`,
 				data
 			);
 			localStorage.setItem("careerAssessment", JSON.stringify(response.data));
