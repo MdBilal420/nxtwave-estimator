@@ -8,6 +8,7 @@ load_dotenv()
 
 # Import routers
 from routes.career_assessment import router as career_router
+from routes.admin import router as admin_router
 
 # Create the FastAPI app
 app = FastAPI(
@@ -27,6 +28,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(career_router, prefix="/api/career-assessment", tags=["Career Assessment"])
+app.include_router(admin_router, prefix="/api/admin", tags=["Admin"])
 
 # Root endpoint for health check
 @app.get("/")

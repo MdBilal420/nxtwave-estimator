@@ -43,7 +43,12 @@ export default function CareerForm() {
 	} = useForm<FormData>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
+			educationLevel: undefined,
+			fieldOfStudy: undefined,
 			skillSet: [],
+			yearsOfExperience: undefined,
+			preferredCareerPath: undefined,
+			techComfortLevel: undefined,
 			currentPackage: "",
 		},
 	});
@@ -102,8 +107,12 @@ export default function CareerForm() {
 								name='educationLevel'
 								control={control}
 								render={({ field }) => (
-									<select {...field} className='form-select'>
-										<option value='' disabled>
+									<select
+										{...field}
+										className='form-select'
+										value={field.value || ""}
+									>
+										<option value='' disabled selected>
 											Select your education level
 										</option>
 										<option value='10th'>10th</option>
@@ -116,7 +125,8 @@ export default function CareerForm() {
 							/>
 							{errors.educationLevel && (
 								<p className='text-red-500 text-sm mt-1'>
-									{errors.educationLevel.message}
+									{errors.educationLevel.message ||
+										"Please select your education level"}
 								</p>
 							)}
 						</div>
@@ -130,8 +140,12 @@ export default function CareerForm() {
 								name='fieldOfStudy'
 								control={control}
 								render={({ field }) => (
-									<select {...field} className='form-select'>
-										<option value='' disabled>
+									<select
+										{...field}
+										className='form-select'
+										value={field.value || ""}
+									>
+										<option value='' disabled selected>
 											Select your field of study
 										</option>
 										<option value='Science'>Science</option>
@@ -144,7 +158,8 @@ export default function CareerForm() {
 							/>
 							{errors.fieldOfStudy && (
 								<p className='text-red-500 text-sm mt-1'>
-									{errors.fieldOfStudy.message}
+									{errors.fieldOfStudy.message ||
+										"Please select your field of study"}
 								</p>
 							)}
 						</div>
@@ -203,8 +218,12 @@ export default function CareerForm() {
 								name='yearsOfExperience'
 								control={control}
 								render={({ field }) => (
-									<select {...field} className='form-select'>
-										<option value='' disabled>
+									<select
+										{...field}
+										className='form-select'
+										value={field.value || ""}
+									>
+										<option value='' disabled selected>
 											Select your experience
 										</option>
 										<option value='0'>0 (Fresher)</option>
@@ -217,7 +236,8 @@ export default function CareerForm() {
 							/>
 							{errors.yearsOfExperience && (
 								<p className='text-red-500 text-sm mt-1'>
-									{errors.yearsOfExperience.message}
+									{errors.yearsOfExperience.message ||
+										"Please select your experience"}
 								</p>
 							)}
 						</div>
@@ -231,8 +251,12 @@ export default function CareerForm() {
 								name='preferredCareerPath'
 								control={control}
 								render={({ field }) => (
-									<select {...field} className='form-select'>
-										<option value='' disabled>
+									<select
+										{...field}
+										className='form-select'
+										value={field.value || ""}
+									>
+										<option value='' disabled selected>
 											Select your preferred path
 										</option>
 										<option value='Software Development'>
@@ -246,7 +270,8 @@ export default function CareerForm() {
 							/>
 							{errors.preferredCareerPath && (
 								<p className='text-red-500 text-sm mt-1'>
-									{errors.preferredCareerPath.message}
+									{errors.preferredCareerPath.message ||
+										"Please select your preferred career path"}
 								</p>
 							)}
 						</div>
@@ -260,8 +285,12 @@ export default function CareerForm() {
 								name='techComfortLevel'
 								control={control}
 								render={({ field }) => (
-									<select {...field} className='form-select'>
-										<option value='' disabled>
+									<select
+										{...field}
+										className='form-select'
+										value={field.value || ""}
+									>
+										<option value='' disabled selected>
 											Select your comfort level
 										</option>
 										<option value='None'>None</option>
@@ -273,7 +302,8 @@ export default function CareerForm() {
 							/>
 							{errors.techComfortLevel && (
 								<p className='text-red-500 text-sm mt-1'>
-									{errors.techComfortLevel.message}
+									{errors.techComfortLevel.message ||
+										"Please select your tech comfort level"}
 								</p>
 							)}
 						</div>
