@@ -129,7 +129,20 @@ export default function AdminDashboard() {
 			try {
 				dispatch({ type: "SET_LOADING", payload: true });
 				// Fetch admin dashboard data from our backend API
-				const response = await axios.get("/api/admin/dashboard");
+				// let response;
+				// if (process.env.NODE_ENV === "development") {
+				// 	response = await axios.get(
+				// 		"http://localhost:8000/api/admin/dashboard"
+				// 	);
+				// } else {
+				// 	response = await axios.get(
+				// 		"https://alright-dyanne-bilal420-fe9cd9f1.koyeb.app/api/admin/dashboard"
+				// 	);
+				// }
+
+				const response = await axios.get(
+					"https://alright-dyanne-bilal420-fe9cd9f1.koyeb.app/api/admin/dashboard"
+				);
 
 				// Set the data to state
 				dispatch({ type: "SET_DASHBOARD_DATA", payload: response.data });
