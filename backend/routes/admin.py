@@ -1,27 +1,25 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, HTTPException, status
 from typing import Dict, List, Any, Optional
 import json
 from datetime import datetime, timedelta
 from collections import Counter, defaultdict
 
-from services.database_service import DatabaseService
+import services.database_service as database_service
 
 # Create the router
 router = APIRouter()
 
-# Dependency injection for services
-def get_database_service():
-    return DatabaseService()
-
 # Routes
 @router.get("/dashboard")
-async def get_admin_dashboard(db_service: DatabaseService = Depends(get_database_service)):
+async def get_admin_dashboard():
     """
     Get analytics data for the admin dashboard
     """
     try:
+        print("get_admin_dashboard")
         # Get all assessments data from database
-        assessments = await db_service.get_all_assessments()
+        assessments = await database_service.get_all_assessments()
+        print("assessments", assessments)
         
         if not assessments:
             # Return empty data structure if no assessments are found
