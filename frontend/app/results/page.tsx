@@ -17,8 +17,6 @@ interface CareerAssessment {
 	roiOfUpskilling: string;
 }
 
-// MVC Pattern: This component follows MVC with the data model (CareerAssessment),
-// controller logic (useEffect, formatCurrency), and view rendering (JSX)
 export default function ResultsPage() {
 	const [assessment, setAssessment] = useState<CareerAssessment | null>(null);
 	const [loading, setLoading] = useState(true);
@@ -67,7 +65,7 @@ export default function ResultsPage() {
 					assessment form to see your personalized career insights.
 				</p>
 				<Link
-					href='/career-form'
+					href='/'
 					className='py-2.5 px-6 rounded-lg bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-semibold shadow-lg hover:shadow-xl backdrop-blur-sm border border-sky-300/50 transition-all'
 				>
 					Take the Assessment
