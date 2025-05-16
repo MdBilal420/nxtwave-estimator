@@ -22,21 +22,13 @@ class Settings(BaseModel):
     HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", "8000"))
     
-    # Security
-    JWT_SECRET: str = os.getenv("JWT_SECRET", "your-secret-key-for-development-only")
-    JWT_ALGORITHM: str = "HS256"
-    TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 1 week
     
     # External services
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
     SUPABASE_URL: str = os.getenv("SUPABASE_URL", "")
     SUPABASE_KEY: str = os.getenv("SUPABASE_KEY", "")
     
-    # CORS settings
-    CORS_ORIGINS: list = [
-        "http://localhost:3000",  # Frontend URL
-        "https://nxtwavee.com"
-    ]
+
 
 # Create settings instance
 settings = Settings() 

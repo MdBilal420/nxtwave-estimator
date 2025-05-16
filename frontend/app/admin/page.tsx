@@ -3,8 +3,6 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useEffect, useReducer } from "react";
-import AssessmentMetrics from "./components/AssessmentMetrics";
-import CareerPathInsights from "./components/CareerPathInsights";
 import DemographicsChart from "./components/DemographicsChart";
 import SkillsAnalysis from "./components/SkillsAnalysis";
 import StatsCard from "./components/StatsCard";
@@ -20,8 +18,6 @@ const initialState = {
 	},
 	demographicsData: {},
 	skillsData: {},
-	careerPathData: {},
-	assessmentData: {},
 };
 
 function reducer(state: any, action: any) {
@@ -36,8 +32,6 @@ function reducer(state: any, action: any) {
 				stats: action.payload.stats,
 				demographicsData: action.payload.demographics,
 				skillsData: action.payload.skills,
-				careerPathData: action.payload.careerPaths,
-				assessmentData: action.payload.assessments,
 			};
 		case "SET_MOCK_DATA":
 			return {
@@ -86,35 +80,6 @@ function reducer(state: any, action: any) {
 						{ name: "SQL", count: 32 },
 					],
 				},
-				careerPathData: {
-					distribution: {
-						"Software Development": 65,
-						"Data Analyst": 28,
-						Business: 18,
-						Undecided: 17,
-					},
-					salaryRanges: {
-						"Software Development": "10-16",
-						"Data Analyst": "8-12",
-						Business: "6-10",
-						Undecided: "5-8",
-					},
-				},
-				assessmentData: {
-					monthly: [
-						{ month: "Jan", count: 12 },
-						{ month: "Feb", count: 15 },
-						{ month: "Mar", count: 24 },
-						{ month: "Apr", count: 32 },
-						{ month: "May", count: 45 },
-					],
-					roiDistribution: {
-						"30-50%": 25,
-						"50-70%": 48,
-						"70-90%": 35,
-						"90%+": 20,
-					},
-				},
 			};
 		default:
 			return state;
@@ -141,7 +106,7 @@ export default function AdminDashboard() {
 				// }
 
 				const response = await axios.get(
-					"https://alright-dyanne-bilal420-fe9cd9f1.koyeb.app/api/admin/dashboard"
+					`${process.env.NEXT_PUBLIC_API_URL}/admin/dashboard`
 				);
 
 				// Set the data to state
@@ -167,25 +132,26 @@ export default function AdminDashboard() {
 
 	if (state.loading) {
 		return (
-			<div className='flex items-center justify-center min-h-screen'>
-				<div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-skyblue-500'></div>
+			<div className='flex items-center justify-center min-h-screen bg-gradient-to-br from-sky-100 to-indigo-100'>
+				<div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-sky-500'></div>
 			</div>
 		);
 	}
 
 	return (
-		<div className='container mx-auto px-4 py-8'>
+		<div className='min-h-screen bg-gradient-to-br from-sky-100 to-indigo-100 py-4'>
 			<motion.div
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
+				className='container mx-auto px-4'
 			>
-				<h1 className='text-3xl font-bold text-skyblue-700 mb-8'>
+				<h1 className='text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500 mb-8 text-center'>
 					Admin Dashboard
 				</h1>
 
 				{state.error && (
-					<div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6'>
+					<div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6'>
 						{state.error}
 					</div>
 				)}
@@ -240,32 +206,6 @@ export default function AdminDashboard() {
 							Skills Analysis
 						</h2>
 						<SkillsAnalysis data={state.skillsData} />
-					</motion.div>
-
-					{/* Career Path Insights */}
-					<motion.div
-						className='card'
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ delay: 0.4 }}
-					>
-						<h2 className='text-xl font-semibold text-gray-800 mb-4'>
-							Career Path Insights
-						</h2>
-						<CareerPathInsights data={state.careerPathData} />
-					</motion.div>
-
-					{/* Assessment Metrics */}
-					<motion.div
-						className='card'
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ delay: 0.5 }}
-					>
-						<h2 className='text-xl font-semibold text-gray-800 mb-4'>
-							Assessment Metrics
-						</h2>
-						<AssessmentMetrics data={state.assessmentData} />
 					</motion.div>
 				</div>
 			</motion.div>

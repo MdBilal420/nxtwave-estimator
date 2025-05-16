@@ -8,7 +8,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				skyblue: {
+				sky: {
 					50: "#f0f7ff",
 					100: "#e0f0ff",
 					200: "#bae2ff",
@@ -19,6 +19,18 @@ module.exports = {
 					700: "#0059b8",
 					800: "#004a98",
 					900: "#00397d",
+				},
+				indigo: {
+					50: "#f5f3ff",
+					100: "#ede9fe",
+					200: "#ddd6fe",
+					300: "#c4b5fd",
+					400: "#a78bfa",
+					500: "#8b5cf6",
+					600: "#7c3aed",
+					700: "#6d28d9",
+					800: "#5b21b6",
+					900: "#4c1d95",
 				},
 				glassmorphic: {
 					white: "rgba(255, 255, 255, 0.15)",

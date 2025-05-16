@@ -26,7 +26,7 @@ const SkillsAnalysis: React.FC<SkillsAnalysisProps> = ({ data }) => {
 		const activeData = data[activeTab] || [];
 
 		if (activeData.length === 0) {
-			return <p className='text-gray-500 italic'>No data available</p>;
+			return <p className='text-sky-700 italic'>No data available</p>;
 		}
 
 		const maxCount = getMaxCount(activeData);
@@ -39,20 +39,25 @@ const SkillsAnalysis: React.FC<SkillsAnalysisProps> = ({ data }) => {
 						maxCount > 0 ? Math.max(15, (skill.count / maxCount) * 100) : 0;
 
 					// Alternate colors for better visualization
-					const bgColor = index % 2 === 0 ? "bg-skyblue-500" : "bg-skyblue-400";
+					const bgGradient =
+						index % 2 === 0
+							? "bg-gradient-to-r from-sky-400 to-sky-500"
+							: "bg-gradient-to-r from-indigo-400 to-indigo-500";
 
 					return (
 						<div key={skill.name} className='space-y-1'>
 							<div className='flex items-center justify-between'>
-								<span className='text-sm font-medium'>{skill.name}</span>
-								<span className='text-sm text-gray-500'>{skill.count}</span>
+								<span className='text-sm font-medium text-sky-800'>
+									{skill.name}
+								</span>
+								<span className='text-sm text-sky-600'>{skill.count}</span>
 							</div>
-							<div className='w-full bg-gray-100 rounded-md h-8'>
+							<div className='w-full bg-sky-50/70 rounded-lg h-8 shadow-inner border border-sky-100/80'>
 								<div
-									className={`${bgColor} rounded-md h-8 flex items-center px-2 text-xs text-white font-medium`}
+									className={`${bgGradient} rounded-lg h-8 flex items-center px-3 text-sm text-white font-medium shadow-md transition-all duration-500 ease-out`}
 									style={{ width: `${widthPercentage}%` }}
 								>
-									{skill.count > 5 && skill.name}
+									{skill.count > 3 && skill.name}
 								</div>
 							</div>
 						</div>
@@ -65,23 +70,23 @@ const SkillsAnalysis: React.FC<SkillsAnalysisProps> = ({ data }) => {
 	return (
 		<div>
 			{/* Tabs for switching between skill views */}
-			<div className='flex space-x-1 mb-6 bg-gray-100 p-1 rounded-md'>
+			<div className='flex space-x-1 mb-6 bg-sky-50/70 p-1 rounded-lg shadow-sm'>
 				<button
 					onClick={() => setActiveTab("popular")}
-					className={`flex-1 px-4 py-2 text-sm font-medium rounded-md ${
+					className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-all ${
 						activeTab === "popular"
-							? "bg-white text-skyblue-600 shadow"
-							: "text-gray-500 hover:text-gray-700"
+							? "bg-gradient-to-r from-sky-500 to-indigo-500 text-white shadow-md"
+							: "text-sky-700 hover:text-sky-900 hover:bg-white/50"
 					}`}
 				>
 					Popular Skills
 				</button>
 				<button
 					onClick={() => setActiveTab("missing")}
-					className={`flex-1 px-4 py-2 text-sm font-medium rounded-md ${
+					className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-all ${
 						activeTab === "missing"
-							? "bg-white text-skyblue-600 shadow"
-							: "text-gray-500 hover:text-gray-700"
+							? "bg-gradient-to-r from-sky-500 to-indigo-500 text-white shadow-md"
+							: "text-sky-700 hover:text-sky-900 hover:bg-white/50"
 					}`}
 				>
 					Missing Skills

@@ -4,27 +4,34 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
+		"dev:local": "cross-env NEXT_PUBLIC_API_URL=http://localhost:8000/api next dev",
+		"dev:prod": "cross-env NEXT_PUBLIC_API_URL=https://alright-dyanne-bilal420-fe9cd9f1.koyeb.app/api next dev",
 		"build": "next build",
+		"build:local": "cross-env NEXT_PUBLIC_API_URL=http://localhost:8000/api next build",
+		"build:prod": "cross-env NEXT_PUBLIC_API_URL=https://alright-dyanne-bilal420-fe9cd9f1.koyeb.app/api next build",
 		"start": "next start",
+		"start:local": "cross-env NEXT_PUBLIC_API_URL=http://localhost:8000/api next start",
+		"start:prod": "cross-env NEXT_PUBLIC_API_URL=https://alright-dyanne-bilal420-fe9cd9f1.koyeb.app/api next start",
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^3.3.4",
+		"autoprefixer": "^10.4.16",
+		"axios": "^1.6.7",
+		"framer-motion": "^11.0.3",
 		"next": "^14.1.0",
+		"postcss": "^8.4.31",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"axios": "^1.6.7",
 		"react-hook-form": "^7.50.0",
-		"zod": "^3.22.4",
-		"@hookform/resolvers": "^3.3.4",
 		"tailwindcss": "^3.4.1",
-		"postcss": "^8.4.31",
-		"autoprefixer": "^10.4.16",
-		"framer-motion": "^11.0.3"
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@types/node": "^20.11.7",
 		"@types/react": "^18.2.48",
 		"@types/react-dom": "^18.2.18",
+		"cross-env": "^7.0.3",
 		"eslint": "^8.56.0",
 		"eslint-config-next": "^14.1.0",
 		"typescript": "^5.3.3"

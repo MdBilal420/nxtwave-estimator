@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Navigation from "./components/Navigation";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "NxtWavee - Career Insights",
+	title: "Career & Salary Estimator",
 	description:
 		"Get personalized career insights and upskilling recommendations",
 };
@@ -18,7 +19,8 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={inter.className}>
-				<main className='container mx-auto px-4 py-8 max-w-6xl'>
+				<Navigation />
+				<main className='container mx-auto px-4 pt-20 pb-8 max-w-6xl'>
 					{children}
 				</main>
 			</body>
