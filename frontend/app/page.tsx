@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -46,6 +46,29 @@ type FormData = z.infer<typeof formSchema>;
 export default function Home() {
 	const router = useRouter();
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+	// Check for error query parameter
+	useEffect(() => {
+		// Get URL parameters
+		const params = new URLSearchParams(window.location.search);
+		const error = params.get("error");
+
+		if (error === "no_assessment") {
+			setErrorMessage(
+				"Please complete the assessment form first to view your results."
+			);
+		} else if (error === "invalid_data") {
+			setErrorMessage(
+				"There was an issue with your assessment data. Please retake the assessment."
+			);
+		}
+
+		// Clear the error from URL
+		if (error) {
+			window.history.replaceState({}, document.title, window.location.pathname);
+		}
+	}, []);
 
 	const {
 		control,
@@ -71,7 +94,13 @@ export default function Home() {
 				`${process.env.NEXT_PUBLIC_API_URL}/career-assessment/analyze`,
 				data
 			);
+			// Store assessment data in localStorage
 			localStorage.setItem("careerAssessment", JSON.stringify(response.data));
+
+			// Dispatch custom event to notify components that assessment data has changed
+			window.dispatchEvent(new Event("assessmentUpdated"));
+
+			// Navigate to results page
 			router.push("/results");
 		} catch (error) {
 			console.error("Error submitting form:", error);
@@ -84,16 +113,27 @@ export default function Home() {
 	};
 
 	return (
-		<div className='h-screen flex flex-col items-center justify-center py-2 bg-gradient-to-br from-sky-100 to-indigo-100'>
+		<div className='min-h-screen flex flex-col items-center justify-center py-2 bg-gradient-to-br from-sky-100 to-indigo-100'>
 			<motion.div
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
-				className='w-full max-w-5xl px-4 pb-6'
+				className='w-full max-w-5xl px-4 pb-6 pt-4'
 			>
 				<h1 className='text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500 mb-4 text-center'>
 					Career & Salary Estimator
 				</h1>
+
+				{errorMessage && (
+					<motion.div
+						initial={{ opacity: 0, y: -10 }}
+						animate={{ opacity: 1, y: 0 }}
+						className='mb-4 p-4 bg-red-100/80 backdrop-blur-sm border border-red-300 rounded-lg text-red-700 text-center'
+					>
+						{errorMessage}
+					</motion.div>
+				)}
+
 				<div className='backdrop-blur-lg bg-sky-100/30 rounded-2xl shadow-xl border border-sky-200/50 p-8 relative overflow-hidden'>
 					{/* Decorative elements */}
 					<div className='absolute -top-24 -right-24 w-48 h-48 rounded-full bg-sky-400 opacity-20 blur-3xl'></div>

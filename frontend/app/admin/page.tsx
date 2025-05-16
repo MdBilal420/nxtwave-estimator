@@ -167,25 +167,26 @@ export default function AdminDashboard() {
 
 	if (state.loading) {
 		return (
-			<div className='flex items-center justify-center min-h-screen'>
-				<div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-skyblue-500'></div>
+			<div className='flex items-center justify-center min-h-screen bg-gradient-to-br from-sky-100 to-indigo-100'>
+				<div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-sky-500'></div>
 			</div>
 		);
 	}
 
 	return (
-		<div className='container mx-auto px-4 py-8'>
+		<div className='min-h-screen bg-gradient-to-br from-sky-100 to-indigo-100 py-4'>
 			<motion.div
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
+				className='container mx-auto px-4'
 			>
-				<h1 className='text-3xl font-bold text-skyblue-700 mb-8'>
+				<h1 className='text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500 mb-8 text-center'>
 					Admin Dashboard
 				</h1>
 
 				{state.error && (
-					<div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6'>
+					<div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6'>
 						{state.error}
 					</div>
 				)}

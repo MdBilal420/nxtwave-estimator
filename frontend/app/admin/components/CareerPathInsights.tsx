@@ -85,11 +85,11 @@ const CareerPathInsights: React.FC<CareerPathInsightsProps> = ({ data }) => {
 						</div>
 
 						{/* Salary comparison */}
-						<div>
-							<h3 className='text-sm font-medium text-gray-700 mb-3'>
+						<div className='mt-6'>
+							<h3 className='text-sm font-medium text-gray-700 mb-4'>
 								Salary Ranges (LPA)
 							</h3>
-							<div className='bg-gray-50 rounded-lg p-4'>
+							<div className='bg-gradient-to-br from-gray-50 to-white rounded-lg p-5 shadow-sm border border-gray-100'>
 								<ul className='space-y-3'>
 									{sortedPaths.map(([path], index) => {
 										const salaryRange = data.salaryRanges?.[path] || "N/A";
@@ -97,12 +97,12 @@ const CareerPathInsights: React.FC<CareerPathInsightsProps> = ({ data }) => {
 										return (
 											<li
 												key={path}
-												className='flex items-center justify-between'
+												className='flex items-center justify-between py-1 px-2 hover:bg-gray-50 rounded-md transition-colors'
 											>
-												<span className='text-sm truncate max-w-[70%]'>
+												<span className='text-sm font-medium text-gray-700 truncate max-w-[70%]'>
 													{path}
 												</span>
-												<span className='text-sm font-bold text-skyblue-600 bg-skyblue-50 px-2 py-1 rounded'>
+												<span className='text-sm font-semibold text-sky-600 bg-sky-50 px-3 py-1.5 rounded-full shadow-sm'>
 													₹{salaryRange}
 												</span>
 											</li>

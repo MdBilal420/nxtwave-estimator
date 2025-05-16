@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface CareerAssessment {
@@ -20,6 +21,7 @@ interface CareerAssessment {
 export default function ResultsPage() {
 	const [assessment, setAssessment] = useState<CareerAssessment | null>(null);
 	const [loading, setLoading] = useState(true);
+	const router = useRouter();
 
 	useEffect(() => {
 		// Get assessment data from localStorage
@@ -29,13 +31,17 @@ export default function ResultsPage() {
 			try {
 				const parsed = JSON.parse(storedAssessment);
 				setAssessment(parsed);
+				setLoading(false);
 			} catch (error) {
 				console.error("Error parsing assessment data:", error);
+				// Redirect to home page if data can't be parsed
+				router.push("/?error=invalid_data");
 			}
+		} else {
+			// Redirect to home page if no assessment data exists
+			router.push("/?error=no_assessment");
 		}
-
-		setLoading(false);
-	}, []);
+	}, [router]);
 
 	const formatCurrency = (value: string) => {
 		return `₹${value.replace(/(\d+)-(\d+)/, "$1-$2")}`;
@@ -43,7 +49,7 @@ export default function ResultsPage() {
 
 	if (loading) {
 		return (
-			<div className='h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 to-indigo-100'>
+			<div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 to-indigo-100'>
 				<div className='text-xl text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-500 font-semibold'>
 					Loading your results...
 				</div>
@@ -52,35 +58,24 @@ export default function ResultsPage() {
 	}
 
 	if (!assessment) {
+		// This should not be shown as we redirect in the useEffect
+		// But keeping as a fallback
 		return (
-			<div className='h-screen flex flex-col items-center justify-center space-y-6 bg-gradient-to-br from-sky-100 to-indigo-100 p-4'>
-				<h1 className='text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500 text-center'>
-					Career & Salary Estimator
-				</h1>
-				<h2 className='text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-500 text-center'>
-					No Assessment Results Found
-				</h2>
-				<p className='text-lg text-sky-900 text-center max-w-xl'>
-					We couldn't find your assessment results. Please complete the
-					assessment form to see your personalized career insights.
-				</p>
-				<Link
-					href='/'
-					className='py-2.5 px-6 rounded-lg bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-semibold shadow-lg hover:shadow-xl backdrop-blur-sm border border-sky-300/50 transition-all'
-				>
-					Take the Assessment
-				</Link>
+			<div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 to-indigo-100'>
+				<div className='text-xl text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-500 font-semibold'>
+					Redirecting to form...
+				</div>
 			</div>
 		);
 	}
 
 	return (
-		<div className='min-h-screen flex flex-col items-center justify-center py-8 bg-gradient-to-br from-sky-100 to-indigo-100'>
+		<div className='min-h-screen flex flex-col items-center justify-center py-4 bg-gradient-to-br from-sky-100 to-indigo-100'>
 			<motion.div
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ duration: 0.5 }}
-				className='w-full max-w-4xl px-4 pb-6'
+				className='w-full max-w-4xl px-4 pb-6 pt-4'
 			>
 				<div className='backdrop-blur-lg bg-sky-100/30 rounded-2xl shadow-xl border border-sky-200/50 p-8 relative overflow-hidden mb-6'>
 					{/* Decorative elements */}
